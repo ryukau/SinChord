@@ -295,8 +295,8 @@ class NumberInput {
     this.number.className = "numberInputNumber"
     parent.appendChild(this.div)
 
-    this.range.addEventListener("change", () => this.onInput(event), false)
-    this.number.addEventListener("change", () => this.onInput(event), false)
+    this.range.addEventListener("change", (event) => this.onInput(event), false)
+    this.number.addEventListener("change", (event) => this.onInput(event), false)
   }
 
   onInput(event) {
