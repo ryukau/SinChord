@@ -35,9 +35,10 @@ function save(wave) {
   a.href = url
   a.download = "SinChord_" + Date.now() + ".wav"
   a.click()
-  document.body.removeChild(a)
-
-  window.URL.revokeObjectURL(url)
+  setTimeout(() => {
+    document.body.removeChild(a)
+    window.URL.revokeObjectURL(url)
+  }, 100)
 }
 
 // pitch は一番低い周波数。
