@@ -214,9 +214,12 @@ class Checkbox {
 
     this.input = document.createElement("input")
     this.input.type = "checkbox"
-    this.input.setAttribute("checked", true)
+    if (checked) {
+      this.input.setAttribute("checked", checked)
+    }
 
     this.label = document.createElement("label")
+    this.label.className = "labelCheckbox"
     this.label.addEventListener("change", (event) => this.onChange(event), false)
     this.label.innerHTML = this.input.outerHTML + label
     parent.appendChild(this.label)
@@ -226,12 +229,17 @@ class Checkbox {
     return this.label
   }
 
+  get value() {
+    return this.input.checked
+  }
+
   onChange(event) {
     this.onChangeFunc(event.target.checked)
   }
 }
 
 class RadioButton {
+  // nameが""だと正しく動かない。
   constructor(parent, name, onChangeFunc) {
     this.name = name
     this.onChangeFunc = onChangeFunc
@@ -307,7 +315,7 @@ class NumberInput {
     value = Math.max(this.min, Math.min(value, this.max))
     this.range.value = value
     this.number.value = value
-    this.onInputFunc()
+    this.onInputFunc(value)
   }
 
   get value() {
@@ -328,12 +336,12 @@ class NumberInput {
 
   addInput(type, value, min, max, step) {
     var input = document.createElement("input")
+    this.div.appendChild(input)
     input.type = type
-    input.value = value
     input.min = min
     input.max = max
     input.step = step
-    this.div.appendChild(input)
+    input.value = value
     return input
   }
 }
